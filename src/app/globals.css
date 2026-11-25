@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --color-rose-soft: #f7c9d8;
+  --color-rose-soft-deep: #f4afc6;
+  --color-rose-bg: #fff5f8;
+  --color-cream: #fffdf8;
+  --color-lavender: #e8ddf7;
+  --color-lavender-deep: #d6c5ef;
+  --color-cocoa: #55434a;
+  --color-cocoa-light: #7a666d;
+  --color-accent-red: #d97a8a;
+  --color-white-soft: #fffafb;
+
+  --font-display: var(--font-fredoka), "Fredoka", sans-serif;
+  --font-body: var(--font-nunito), "Nunito", sans-serif;
+
+  --shadow-cozy: 0 8px 30px rgba(247, 201, 216, 0.35);
+  --shadow-cozy-hover: 0 14px 40px rgba(244, 175, 198, 0.45);
+  --shadow-card: 0 4px 20px rgba(85, 67, 74, 0.06);
+}
+
+:root {
+  --background: #fff5f8;
+  --foreground: #55434a;
+  --font-fredoka: "Fredoka", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #f7c9d8;
+  color: #55434a;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Decorative floating animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33% { transform: translateY(-10px) translateX(4px); }
+  66% { transform: translateY(-18px) translateX(-4px); }
+}
+
+@keyframes drift {
+  0% { transform: translateX(-10%) translateY(0); }
+  50% { transform: translateX(10%) translateY(-8px); }
+  100% { transform: translateX(-10%) translateY(0); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.15) rotate(12deg); }
+}
+
+@keyframes fall-gentle {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(110vh) rotate(180deg); opacity: 0; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 2.8s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Nice focus styles */
+:focus-visible {
+  outline: 3px solid #f4afc6;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Hide scrollbar for aesthetic elements but keep functionality */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
