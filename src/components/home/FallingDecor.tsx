@@ -11,19 +11,22 @@ export function FallingDecor() {
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    if (mq.matches) return;
-    const types: Item["type"][] = ["heart", "star", "sparkle", "heart", "star"];
-    setItems(
-      types.map((type, i) => ({
-        id: i,
-        left: 8 + i * 18 + Math.random() * 8,
-        delay: i * 3.2 + Math.random() * 2,
-        duration: 14 + Math.random() * 8,
-        size: type === "sparkle" ? 14 : 18,
-        type,
-      })),
-    );
+    const frame = requestAnimationFrame(() => {
+      setReduced(mq.matches);
+      if (mq.matches) return;
+      const types: Item["type"][] = ["heart", "star", "sparkle", "heart", "star"];
+      setItems(
+        types.map((type, i) => ({
+          id: i,
+          left: 8 + i * 18 + Math.random() * 8,
+          delay: i * 3.2 + Math.random() * 2,
+          duration: 14 + Math.random() * 8,
+          size: type === "sparkle" ? 14 : 18,
+          type,
+        })),
+      );
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   if (reduced || items.length === 0) return null;
